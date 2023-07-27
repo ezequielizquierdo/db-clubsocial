@@ -74,7 +74,7 @@ create table if not exists clubsocial.socios (
     apellido_socio VARCHAR(40) NOT NULL,
     fecha_nacimiento_socio DATE NOT NULL,
     id_direccion INT,
-    sexo ENUM('F', 'M', 'X') UNIQUE,
+    sexo ENUM('F', 'M', 'X'),
     id_cobertura INT,
     id_telefono INT,
     id_email INT,
@@ -104,10 +104,6 @@ create table if not exists clubsocial.medico (
     FOREIGN KEY (id_disciplina) REFERENCES disciplina (id_disciplina),
     FOREIGN KEY (id_profesion) REFERENCES profesion (id_profesion)
 );
-
-
-
-
 
 create table if not exists clubsocial.equipo (
 	id_equipo INT AUTO_INCREMENT,
