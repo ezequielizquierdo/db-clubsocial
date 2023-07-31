@@ -97,22 +97,20 @@ create table if not exists clubsocial.profesor (
 create table if not exists clubsocial.medico (
 	id_medico INT AUTO_INCREMENT,
     id_socio INT,
-    id_disciplina INT,
     id_profesion INT,
     PRIMARY KEY (id_medico),
     FOREIGN KEY (id_socio) REFERENCES socios (id_socio),
-    FOREIGN KEY (id_disciplina) REFERENCES disciplina (id_disciplina),
     FOREIGN KEY (id_profesion) REFERENCES profesion (id_profesion)
 );
 
-create table if not exists clubsocial.equipo (
-	id_equipo INT AUTO_INCREMENT,
+create table if not exists clubsocial.planteles (
+	id_plantel INT AUTO_INCREMENT,
     id_disciplina INT,
     id_socio INT,
     id_profesor INT,
     id_medico INT,
     id_sede INT,
-    PRIMARY KEY (id_equipo),
+    PRIMARY KEY (id_plantel),
     FOREIGN KEY (id_disciplina) REFERENCES disciplina (id_disciplina),
     FOREIGN KEY (id_socio) REFERENCES socios (id_socio),
     FOREIGN KEY (id_profesor) REFERENCES profesor (id_profesor),

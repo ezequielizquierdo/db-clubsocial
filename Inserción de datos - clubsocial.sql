@@ -153,7 +153,7 @@ VALUES
 (NULL,58986140,"Jeana","Phizackarley","1983-04-17",1,"F",1,1,1),
 (NULL,34226785,"Nikki","Ledingham","2005-01-24",2,"M",2,2,2),
 (NULL,17567122,"Doroteya","Gallanders","1960-08-02",3,"M",3,3,3),
-(NULL,79727852,"Vittorio","Bonnick","1994-07-21",4,"F",4,4,4),
+(NULL,79727852,"Vittorio","Bonnick","1994-07-21",4,"M",4,4,4),
 (NULL,02874969,"Clemmy","Pauel","1999-10-08",5,"F",1,5,5),
 (NULL,18975407,"Eolanda","Vern","2002-03-17",6,"M",2,6,6),
 (NULL,95221933,"Bennie","Hundey","1955-10-28",7,"F",3,7,7),
@@ -191,11 +191,11 @@ VALUES
 (NULL,7,6),
 (NULL,12,1);
 
-INSERT INTO equipo (id_equipo, id_disciplina, id_socio, id_profesor, id_medico, id_sede)
+INSERT INTO planteles (id_plantel, id_disciplina, id_socio, id_profesor, id_medico, id_sede)
 VALUES
-(1,1,1,NULL,NULL,1),
-(2,2,NULL,NULL,NULL,2),
-(3,3,NULL,NULL,NULL,3),
-(4,4,NULL,NULL,NULL,4),
-(5,5,NULL,NULL,NULL,1),
-(6,1,2,NULL,NULL,1);
+(NULL,1,6,1,6,1),
+(NULL,2,17,2,1,2),
+(NULL,3,15,3,3,3),
+(NULL,4,13,4,4,4),
+(NULL,5,10,5,1,1),
+(NULL,1,9,1,6,1);
