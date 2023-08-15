@@ -24,7 +24,6 @@ AND id_socio NOT IN (
     )
 );
 
-    
 -- VISTA DEL PLANTEL DE FUTBOL
 CREATE OR REPLACE VIEW plantel_futbol_vw AS (
 SELECT s.id_socio, s.nombre_socio, s.apellido_socio, d.nombre_disciplina

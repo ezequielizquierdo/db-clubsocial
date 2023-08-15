@@ -32,8 +32,29 @@ BEGIN
 	RETURN apellido_y_nombre;
 END$$
 
+-- FUNCION PARA SABER ESTADO DE CUOTA POR SOCIO
+
+
+
+CREATE FUNCTION obtener_estado_socio(dni INT)		
+RETURNS VARCHAR(50)							
+DETERMINISTIC								
+BEGIN
+	DECLARE estado_socio VARCHAR(50);
+	SET estado_socio = (
+		SELECT e.estado
+		FROM estados e
+        JOIN socios s ON s.id_estado = e.id_estado
+        WHERE s.documento_socio = dni
+			);
+	RETURN estado_socio;
+END$$
+
+
 DELIMITER ;
 
 SELECT obtener_socio(3) as apellido_y_nombre;
 
 SELECT obtener_socio_dni(79727852) as apellido_y_nombre;
+
+SELECT obtener_estado_socio(79727852) as estado_socio;

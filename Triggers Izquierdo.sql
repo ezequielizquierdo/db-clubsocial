@@ -1,17 +1,8 @@
--- Incluir 2 tablas del tipo LOG, Bitacora o Movimientos.
--- Elegir la tabla mas importante donde se operan con mas registros
--- Los triggers deberan:
-	-- controlar la accion previo a la operacion elegida (BEFORE)
-    -- controlar la accion posterior a otra operacion elegida (AFTER)
--- Aspectos a incluir:
-	-- Agrega una explicacion por cada trigger a crear, explicando que controlará.
-	-- Registrar el usuario que realizó la operación, la fecha, y la hora
-    
 use clubsocial;
 
 -- Creo nueva tabla de auditoria para los nuevos socios
 
-CREATE TABLE nuevo_socio (
+CREATE TABLE IF NOT EXISTS nuevo_socio (
 id_nuevo_socio INT NOT NULL AUTO_INCREMENT,
 id_socio INT NOT NULL,
 documento_socio INT NOT NULL UNIQUE,
@@ -48,7 +39,7 @@ VALUES
 
 -- Creo nueva tabla de auditoria para las nuevas sedes
 
-CREATE TABLE nueva_sede (
+CREATE TABLE IF NOT EXISTS nueva_sede (
 id_nueva_sede INT NOT NULL AUTO_INCREMENT,
 id_sede INT NOT NULL,
 nombre_sede VARCHAR(20) NOT NULL,
@@ -84,3 +75,31 @@ VALUES
 ('Ricardo Bochini', 'Bochini', '751', 6, 1)
 ;
 
+-- -------------------------------------
+
+CREATE TABLE IF NOT EXISTS log_registro_de_cuotas (
+	id_registro_de_cuotas INT AUTO_INCREMENT,
+    id_cuota INT,
+    valor_cuota DECIMAL(10, 2) NOT NULL,
+    fecha_cuota DATE,
+    usuario VARCHAR(40),
+	fechahora DATETIME DEFAULT NOW(),
+    PRIMARY KEY (id_registro_de_cuotas),
+    FOREIGN KEY (id_cuota) REFERENCES cuotas (id_cuota)
+);
+
+-- Creo Trigger para las nuevas cuotas
+
+CREATE TRIGGER tr_agregar_nueva_cuota
+AFTER INSERT ON cuotas
+FOR EACH ROW														
+INSERT INTO log_registro_de_cuotas (id_cuota, valor_cuota, fecha_cuota, usuario, fechahora)
+VALUES(
+NEW.id_cuota, NEW.valor_cuota, NEW.fecha_cuota, USER(), NOW()
+);
+
+-- Inserto datos de los socios
+
+INSERT INTO cuotas (valor_cuota, fecha_cuota)
+VALUES
+(1500, '2023-08-11');

@@ -2,6 +2,20 @@ create database clubsocial;						-- creo base de datos
 
 use clubsocial;									-- especifico la db clubsocial como predeterminada
 
+create table if not exists clubsocial.cuotas (
+	id_cuota INT AUTO_INCREMENT,
+    valor_cuota DECIMAL(10, 2) NOT NULL,
+    fecha_cuota DATE,
+    PRIMARY KEY (id_cuota)
+);
+
+create table if not exists clubsocial.estados (
+	id_estado INT AUTO_INCREMENT,
+    estado VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id_estado)
+);
+
+
 create table if not exists clubsocial.email (
 	id_email INT AUTO_INCREMENT,
     email VARCHAR(50) NOT NULL,
@@ -78,11 +92,13 @@ create table if not exists clubsocial.socios (
     id_cobertura INT,
     id_telefono INT,
     id_email INT,
+    id_estado INT,
     PRIMARY KEY (id_socio),
     FOREIGN KEY (id_direccion) REFERENCES direcciones (id_direccion),
     FOREIGN KEY (id_cobertura) REFERENCES cobertura (id_cobertura),
     FOREIGN KEY (id_telefono) REFERENCES telefono (id_telefono),
-    FOREIGN KEY (id_email) REFERENCES email (id_email)
+    FOREIGN KEY (id_email) REFERENCES email (id_email),
+    FOREIGN KEY (id_estado) REFERENCES estados (id_estado)
 );
 
 create table if not exists clubsocial.profesor (
@@ -116,6 +132,17 @@ create table if not exists clubsocial.planteles (
     FOREIGN KEY (id_profesor) REFERENCES profesor (id_profesor),
     FOREIGN KEY (id_medico) REFERENCES medico (id_medico),
     FOREIGN KEY (id_sede) REFERENCES sede (id_sede)
+);
+
+create table if not exists clubsocial.pagos (
+	id_pago INT AUTO_INCREMENT,
+    id_socio INT,
+    id_cuota INT,
+    monto_pagado DECIMAL(10, 2) NOT NULL,
+    fecha_pago DATE,
+    PRIMARY KEY (id_pago),
+    FOREIGN KEY (id_socio) REFERENCES socios (id_socio),
+    FOREIGN KEY (id_cuota) REFERENCES cuotas (id_cuota)
 );
 
 
