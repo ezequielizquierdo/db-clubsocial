@@ -16,7 +16,8 @@ FOREIGN KEY (id_socio) REFERENCES socios (id_socio)
 );
 
 -- Eliminacion de trigger
-drop trigger tr_agregar_nuevo_socio;
+-- drop trigger tr_agregar_nuevo_socio;
+-- drop trigger tr_agregar_nuevo_socio;
 
 -- Creo Trigger para agregar nuevos socios
 
@@ -56,7 +57,7 @@ FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia)
 );
 
 -- Eliminacion de trigger
-drop trigger tr_nueva_sede;
+-- drop trigger tr_nueva_sede;
 
 -- Creo Trigger para agregar nuevas sedes
 
