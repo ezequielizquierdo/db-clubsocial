@@ -2,7 +2,7 @@ use clubsocial;
 
 -- Creo nueva tabla de auditoria para los nuevos socios
 
-CREATE TABLE IF NOT EXISTS nuevo_socio (
+CREATE TABLE IF NOT EXISTS log_nuevo_socio (
 id_nuevo_socio INT NOT NULL AUTO_INCREMENT,
 id_socio INT NOT NULL,
 documento_socio INT NOT NULL UNIQUE,
@@ -24,7 +24,7 @@ FOREIGN KEY (id_socio) REFERENCES socios (id_socio)
 CREATE TRIGGER tr_agregar_nuevo_socio
 AFTER INSERT ON socios
 FOR EACH ROW														
-INSERT INTO nuevo_socio (id_socio, documento_socio, nombre_socio, apellido_socio, fecha_nacimiento_socio, usuario, fechahora)
+INSERT INTO log_nuevo_socio (id_socio, documento_socio, nombre_socio, apellido_socio, fecha_nacimiento_socio, usuario, fechahora)
 VALUES(
 NEW.id_socio, NEW.documento_socio, NEW.nombre_socio, NEW.apellido_socio, NEW.fecha_nacimiento_socio, USER(), NOW()
 );
@@ -40,7 +40,7 @@ VALUES
 
 -- Creo nueva tabla de auditoria para las nuevas sedes
 
-CREATE TABLE IF NOT EXISTS nueva_sede (
+CREATE TABLE IF NOT EXISTS log_nueva_sede (
 id_nueva_sede INT NOT NULL AUTO_INCREMENT,
 id_sede INT NOT NULL,
 nombre_sede VARCHAR(20) NOT NULL,
@@ -64,7 +64,7 @@ FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia)
 CREATE TRIGGER tr_agregar_nueva_sede
 AFTER INSERT ON sede
 FOR EACH ROW														
-INSERT INTO nueva_sede (id_sede, nombre_sede, calle, numero, id_barrio, id_provincia, usuario, fechahora)
+INSERT INTO log_nueva_sede (id_sede, nombre_sede, calle, numero, id_barrio, id_provincia, usuario, fechahora)
 VALUES(
 NEW.id_sede, NEW.nombre_sede, NEW.calle, NEW.numero, NEW.id_barrio, NEW.id_provincia, USER(), NOW()
 );
